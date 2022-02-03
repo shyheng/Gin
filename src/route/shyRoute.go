@@ -17,4 +17,10 @@ func ShyRoute(engine *gin.Engine) {
 	{
 		group.GET("/test", controller.Shy{Name: "shy"}.ShyCon)
 	}
+
+	user := engine.Group("/u")
+	{
+		user.GET("/sel", controller.Shy{}.UserSel)
+		user.GET("/add", controller.Shy{}.Add)
+	}
 }

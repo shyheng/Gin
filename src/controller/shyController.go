@@ -3,6 +3,7 @@ package controller
 import (
 	"ginTest/model"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"os"
 	"path"
 	"strconv"
@@ -61,4 +62,23 @@ func (s Shy) Updata(ctx *gin.Context) {
 	ctx.JSON(200, gin.H{
 		"success": true,
 	})
+}
+
+func (s Shy) UserSel(ctx *gin.Context) {
+	user := []model.User{}
+	model.DB.Find(&user)
+	ctx.JSON(http.StatusOK, gin.H{
+		"result": user,
+	})
+}
+
+func (s Shy) UserAdd(ctx *gin.Context) {
+	user := model.User{
+		Name: "zph",
+		Pass: "123",
+	}
+
+	model.DB.Create(&user)
+
+	ctx.String(http.StatusOK, "增加成功")
 }
