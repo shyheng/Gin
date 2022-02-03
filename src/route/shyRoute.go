@@ -1,14 +1,20 @@
 package route
 
 import (
-	controller2 "ginTest/src/controller"
+	"ginTest/controller"
 	"github.com/gin-gonic/gin"
 )
 
 func ShyRoute(engine *gin.Engine) {
 
+	routerGroup := engine.Group("/")
+	{
+		routerGroup.GET("/add", controller.Shy{}.Add)
+		routerGroup.POST("/updata", controller.Shy{}.Updata)
+	}
+
 	group := engine.Group("/shy")
 	{
-		group.GET("/test", controller2.Shy{Name: "shy"}.ShyCon)
+		group.GET("/test", controller.Shy{Name: "shy"}.ShyCon)
 	}
 }
